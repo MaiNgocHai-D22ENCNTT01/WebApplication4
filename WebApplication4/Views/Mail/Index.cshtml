@@ -1,0 +1,73 @@
+﻿@model WebApplication4.Models.EmailModel
+
+@{
+    ViewBag.Title = "Send Email with Attachment";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Send Email with Attachment</title>
+    <style>
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 5px;
+            }
+
+            .form-group input[type="text"],
+            .form-group input[type="file"],
+            .form-group textarea {
+                width: 100%;
+                padding: 10px;
+                box-sizing: border-box;
+            }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+            button:hover {
+                background-color: #0056b3;
+            }
+    </style>
+</head>
+<body>
+    <div>
+        <h2>Send Email with Attachment</h2>
+
+        @using (Html.BeginForm("SendEmail", "Mail", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="form-group">
+                <label for="From">From:</label>
+                @Html.TextBoxFor(m => m.From, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label for="To">To:</label>
+                @Html.TextBoxFor(m => m.To, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label for="Subject">Subject:</label>
+                @Html.TextBoxFor(m => m.Subject, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label for="Attachment">Attachment:</label>
+                <input type="file" name="Attachment" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="Notes">Notes:</label>
+                @Html.TextAreaFor(m => m.Notes, new { @class = "form-control" })
+            </div>
+            <button type="submit">Send</button>
+        }
+    </div>
+</body>
+</html>
